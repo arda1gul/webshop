@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ARDA SHOP</title>
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -21,7 +23,6 @@
             --border-color: #e2e8f0;
         }
 
-        /* Voorkom horizontaal scrollen op de gehele pagina */
         html,
         body {
             max-width: 100%;
@@ -57,7 +58,6 @@
             background-color: var(--accent-color);
         }
 
-        /* Home Page specifieke stijlen */
         .hero-section {
             background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
             color: white;
@@ -89,7 +89,6 @@
             display: inline-block;
         }
 
-        /* Product Kaarten */
         .product-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -162,7 +161,6 @@
             color: #000000;
         }
 
-        /* Mobiele onderbalk */
         .mobile-nav {
             position: fixed;
             bottom: 0;
@@ -201,20 +199,6 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
-        .form-control-custom {
-            background-color: #f8fafc;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            border-radius: 10px;
-            padding: 10px 14px;
-        }
-
-        .form-control-custom:focus {
-            background-color: #ffffff;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-        }
-
         .filter-select {
             font-size: 0.85rem;
             padding: 10px 14px;
@@ -222,12 +206,6 @@
             background-color: #ffffff;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-        }
-
-        .btn-order {
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            border-radius: 6px;
         }
 
         .active-filter-badge {
@@ -262,6 +240,7 @@
 
 <body>
 
+    <!-- Header / Navbar -->
     <nav class="navbar navbar-expand navbar-light navbar-custom sticky-top py-2">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand fs-3 text-uppercase mb-0" href="#" onclick="switchPage('home')">
@@ -276,11 +255,13 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="categoryDropdown"
                     id="navbar-category-menu">
+                    <!-- Laden via JS -->
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- HOME PAGINA -->
     <div id="home-page" class="container mt-3 page-section px-3">
         <div class="hero-section text-center mb-4">
             <h1 class="display-6 fw-800 mb-2">Welkom bij ARDA SHOP ⚡</h1>
@@ -289,13 +270,13 @@
         </div>
 
         <h3 class="h5 fw-bold mb-3 text-dark"><i class="bi bi-shop-window text-primary"></i> Blader per categorie</h3>
-
         <div class="row g-3" id="home-categories-grid">
+            <!-- Laden via JS -->
         </div>
     </div>
 
+    <!-- SHOP PAGINA -->
     <div id="shop-page" class="container mt-3 page-section d-none">
-
         <div id="active-category-container" class="mb-3 d-none px-1">
             <span class="active-filter-badge">
                 <span id="active-category-name">Categorie</span>
@@ -303,154 +284,42 @@
             </span>
         </div>
 
-        <div id="elektronica-sub-filters" class="mb-3 px-1 d-none">
-            <div class="d-flex gap-2 overflow-x-auto pb-1"
-                style="white-space: nowrap; -webkit-overflow-scrolling: touch;">
-                <button class="sub-filter-btn active" id="sub-filter-all" onclick="setElektronicaSubFilter('all')">Alles
-                    in Elektronica</button>
-                <button class="sub-filter-btn" id="sub-filter-smartwatches"
-                    onclick="setElektronicaSubFilter('smartwatch')"><i class="bi bi-watch"></i> Smartwatches</button>
-                <button class="sub-filter-btn" id="sub-filter-oortjes" onclick="setElektronicaSubFilter('oortjes')"><i
-                        class="bi bi-earbuds"></i> Oortjes</button>
-            </div>
-        </div>
-
+        <!-- Merken Filter -->
         <div class="mb-3 px-1">
             <select id="filter-brand" class="form-select filter-select w-100" onchange="renderShop()">
                 <option value="all">Alle Merken</option>
             </select>
         </div>
 
+        <!-- Producten -->
         <div class="row g-2 px-1" id="products-container">
+            <!-- Laden via JS -->
         </div>
     </div>
 
+    <!-- ADMIN OVERZICHT PAGINA -->
     <div id="admin-page" class="container mt-3 page-section d-none">
         <div class="card admin-card p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h4 mb-0 text-dark fw-bold"><i class="bi bi-sliders"></i> Admin Dashboard</h2>
+                <h2 class="h4 mb-0 text-dark fw-bold"><i class="bi bi-sliders"></i> Code Beheer</h2>
                 <button class="btn btn-outline-danger btn-sm" onclick="logoutAdmin()"><i
                         class="bi bi-box-arrow-right"></i> Log uit</button>
             </div>
 
-            <form id="add-product-form" class="mb-4">
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-secondary">Productnaam *</label>
-                    <input type="text" id="prod-title" class="form-control form-control-custom" required
-                        placeholder="Bijv. Apple Watch Series 9">
-                </div>
-
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <label class="form-label small fw-bold text-secondary">Categorie *</label>
-                        <div class="input-group">
-                            <select id="prod-category-select" class="form-select form-control-custom" required></select>
-                            <button class="btn btn-outline-primary" type="button" onclick="addNewCategoryPrompt()"><i
-                                    class="bi bi-plus"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="col-6 mb-3">
-                        <label class="form-label small fw-bold text-secondary">Merk *</label>
-                        <div class="input-group">
-                            <select id="prod-brand-select" class="form-select form-control-custom" required></select>
-                            <button class="btn btn-outline-primary" type="button" onclick="addNewBrandPrompt()"><i
-                                    class="bi bi-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-secondary">Beschrijving *</label>
-                    <textarea id="prod-desc" class="form-control form-control-custom" rows="2" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small fw-bold text-secondary">Afbeelding URL *</label>
-                    <input type="url" id="prod-img" class="form-control form-control-custom" required
-                        placeholder="https://images.unsplash.com/...">
-                </div>
-                <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold"
-                    style="background-color: var(--accent-color); border: none; border-radius: 12px;">
-                    <i class="bi bi-plus-circle"></i> Product Toevoegen
-                </button>
-            </form>
-
-            <hr class="my-4" style="color: var(--border-color)">
-
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h3 class="h5 mb-0 text-dark fw-bold">Huidige Producten</h3>
-            </div>
-            <p class="text-muted small mb-3">Gebruik ▲ en ▼ om de volgorde direct aan te passen. Klik op ✏️ om te
-                bewerken.</p>
-
-            <div class="row g-2 mb-3">
-                <div class="col-7 col-sm-8">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-light text-muted border-end-0"
-                            style="border-radius: 8px 0 0 8px; border: 1px solid var(--border-color);"><i
-                                class="bi bi-search"></i></span>
-                        <input type="text" id="admin-search-input" class="form-control form-control-sm border-start-0"
-                            placeholder="Zoek product..." oninput="renderAdmin()"
-                            style="border-radius: 0 8px 8px 0; border: 1px solid var(--border-color); padding: 8px;">
-                    </div>
-                </div>
-                <div class="col-5 col-sm-4">
-                    <select id="admin-filter-category" class="form-select form-select-sm" onchange="renderAdmin()"
-                        style="border-radius: 8px; border: 1px solid var(--border-color); padding: 8px; font-size: 0.85rem;">
-                    </select>
-                </div>
+            <div class="alert alert-warning small mb-4" style="border-radius: 12px;">
+                <i class="bi bi-exclamation-triangle-fill"></i> <strong>Hoe voeg je een product toe?</strong> Open de
+                <code>index.html</code> op je computer, kopieer het blanco sjabloon onderaan bij de
+                <code>products</code>-lijst, vul je nieuwe product in, en sla het op. Push daarna naar GitHub Pages
+                zodat iedereen het ziet!
             </div>
 
             <div class="list-group" id="admin-products-list">
+                <!-- Laden via JS -->
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mx-3 mx-sm-auto">
-            <div class="modal-content border-0" style="border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold text-dark"><i class="bi bi-pencil-square text-primary"></i> Product
-                        Bewerken</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="edit-prod-id">
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Productnaam *</label>
-                        <input type="text" id="edit-prod-title" class="form-control form-control-custom" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 mb-3">
-                            <label class="form-label small fw-bold text-secondary">Categorie *</label>
-                            <select id="edit-prod-category" class="form-select form-control-custom" required></select>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label class="form-label small fw-bold text-secondary">Merk *</label>
-                            <select id="edit-prod-brand" class="form-select form-control-custom" required></select>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Beschrijving *</label>
-                        <textarea id="edit-prod-desc" class="form-control form-control-custom" rows="3"
-                            required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label small fw-bold text-secondary">Afbeelding URL *</label>
-                        <input type="url" id="edit-prod-img" class="form-control form-control-custom" required>
-                    </div>
-                </div>
-                <div class="modal-footer border-0 pt-0 d-flex gap-2">
-                    <button type="button" class="btn btn-light w-100 py-2 rounded-3 fw-bold"
-                        data-bs-dismiss="modal">Annuleer</button>
-                    <button type="button" class="btn btn-primary w-100 py-2 rounded-3 fw-bold"
-                        style="background-color: var(--accent-color); border:none;"
-                        onclick="saveProductEdit()">Wijzigingen opslaan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Wachtwoord Modal -->
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm mx-auto">
@@ -460,10 +329,10 @@
                         Toegang Vereist</h5>
                 </div>
                 <div class="modal-body text-center">
-                    <p class="text-secondary small mb-3">Voer de pincode in om naar het admin dashboard te gaan.</p>
-                    <input type="password" id="admin-password-input"
-                        class="form-control form-control-custom text-center fs-4 fw-bold" placeholder="••••"
-                        maxlength="4">
+                    <p class="text-secondary small mb-3">Voer de pincode in om de codelijst te bekijken.</p>
+                    <input type="password" id="admin-password-input" class="form-control text-center fs-4 fw-bold"
+                        placeholder="••••" maxlength="4"
+                        style="background-color: #f8fafc; border-radius: 10px; padding: 10px;">
                     <div id="login-error" class="text-danger small mt-2 d-none">Onjuiste pincode.</div>
                 </div>
                 <div class="modal-footer border-0 pt-0 d-flex gap-2">
@@ -477,6 +346,7 @@
         </div>
     </div>
 
+    <!-- Mobiele Navigatie -->
     <div class="mobile-nav d-flex justify-content-around">
         <a href="#" class="nav-link-custom w-100 active" id="btn-nav-home" onclick="switchPage('home')">
             <i class="bi bi-house-door-fill"></i>Home
@@ -489,67 +359,112 @@
         </a>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Webshop Logica -->
     <script>
-        // Webshop Logica
         const SNAPCHAT_USERNAME = "JOUW_SNAPCHAT_GEBRUIKERSNAAM";
         const ADMIN_CODE = "2210";
-        const DEFAULT_DESCRIPTION = "Snap me voor prijs.";
 
-        // 1. DIT IS JOUW VASTE PRODUCTENLIJST. IEDEREEN ZIET DEZE PRODUCTEN!
-        // Je kunt hieronder heel makkelijk producten toevoegen, aanpassen of verwijderen.
+        // =========================================================================
+        // JOUW HOOFDPRODUCTEN (STAAN DIREKT VAST VOOR IEDEREEN)
+        // =========================================================================
         const products = [
             {
-                id: 1,
-                title: "Air Max Tavas Premium Leather",
+                id: 1781441213554,
+                title: "Schoenen",
                 category: "Schoenen",
-                brand: "Nike",
-                desc: "Direct leverbaar in maat 40 tot 45. Snap me voor prijs.",
-                img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+                brand: "Anders",
+                desc: "Schoenen vallen te regelen, stuur me een snap",
+                img: "https://www.indetexx.com/wp-content/uploads/2025/06/Used-Brand-Shoes-2.webp"
             },
             {
-                id: 2,
-                title: "Premium Essential Hoodie",
+                id: 1781440072170,
+                title: "Voetbal Shirtjes",
                 category: "Kleding",
-                brand: "Adidas",
-                desc: "Oversized fit, lekker warm voor de winter. Snap me voor prijs.",
-                img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+                brand: "Anders",
+                desc: "Elke voetbalshirt is te regelen, stuur me een snap",
+                img: "https://image.parool.nl/270397163/feature-crop/1200/900/afbeelding"
             },
             {
-                id: 3,
-                title: "AirPods Pro met Noise Cancelling",
+                id: 1781439902869,
+                title: "Apple AirPods Max",
                 category: "Elektronica",
                 brand: "Apple",
-                desc: "Inclusief magsafe oplaadcase. Active noise cancelling oortjes. Snap me voor prijs.",
-                img: "https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=500"
+                desc: "Snap me voor prijs",
+                img: "https://ssl.images-ssl-venus.com/97025/2025/06/20/7/f/7fbba8eada88b7f9.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_1500,h_1500/interlace,0/auto-orient,1"
             },
             {
-                id: 4,
-                title: "Apple Watch Series 9 GPS 45mm",
+                id: 1781437533034,
+                title: "Apple AirPods Pro 3",
                 category: "Elektronica",
                 brand: "Apple",
-                desc: "Stijlvolle smartwatch met geavanceerde gezondheidssensoren. Snap me voor prijs.",
-                img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"
+                desc: "Snap me voor prijs.",
+                img: "https://ssl.images-ssl-venus.com/97025/2026/02/08/9/c/9cb36ecc7b21f400.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_600,h_900/interlace,0/auto-orient,1"
+            },
+            {
+                id: 1781437685253,
+                title: "Apple AirPods 4",
+                category: "Elektronica",
+                brand: "Apple",
+                desc: "Snap me voor prijs.",
+                img: "https://ssl.images-ssl-venus.com/97025/2024/11/13/3/3/33ab4478591ddfe8.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_500,h_500/interlace,0/auto-orient,1"
+            },
+            {
+                id: 1781437723721,
+                title: "Apple AirPods 2",
+                category: "Elektronica",
+                brand: "Apple",
+                desc: "Snap me voor prijs.",
+                img: "https://ssl.images-ssl-venus.com/97025/2023/04/18/a/b/ab4a4b0800eaf35d.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_500,h_500/interlace,0/auto-orient,1"
+            },
+            {
+                id: 1781437850175,
+                title: "Apple AirPods Pro 2",
+                category: "Elektronica",
+                brand: "Apple",
+                desc: "Snap me voor prijs.",
+                img: "https://ssl.images-ssl-venus.com/97025/2023/04/18/1/8/185d212c3ff60f9d.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_500,h_500/interlace,0/auto-orient,1"
+            },
+            {
+                id: 1781439838922,
+                title: "Apple Magsafe Wireless Charger",
+                category: "Elektronica",
+                brand: "Apple",
+                desc: "Snap me voor prijs",
+                img: "https://ssl.images-ssl-venus.com/97025/2023/11/06/1/6/1690ae80669642e7.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_500,h_500/interlace,0/auto-orient,1"
+            },
+            {
+                id: 1781439135081,
+                title: "Apple Watch Series 11",
+                category: "Elektronica",
+                brand: "Apple",
+                desc: "Snap me voor prijs",
+                img: "https://ssl.images-ssl-venus.com/97025/2025/02/26/f/5/f55d78b48980ebbd.webp?x-oss-process=image/quality,q_90/resize,m_lfit,w_500,h_500/interlace,0/auto-orient,1"
             }
+            // ==========================================
+            // TIP: KOPIEER HET BLOKJE HIERONDER OM EEN NIEUW PRODUCT TOE TE VOEGEN:
+            // ==========================================
+            // ,{
+            //     id: Date.now(),
+            //     title: "Zet hier je titel",
+            //     category: "Kleding", // Kies uit: "Schoenen", "Kleding" of "Elektronica"
+            //     brand: "Nike",       // Kies uit: "Nike", "Adidas", "Apple", "Puma", "Samsung", "Anders"
+            //     desc: "Zet hier je omschrijving neer.",
+            //     img: "Plak hier een foto link"
+            // }
         ];
 
-        // Lijsten voor dropdowns (Deze mogen voor het gemak wel in het geheugen blijven)
-        let categoriesList = JSON.parse(localStorage.getItem('arda_categories')) || ["Schoenen", "Kleding", "Elektronica"];
-        let brandsList = JSON.parse(localStorage.getItem('arda_brands')) || ["Nike", "Adidas", "Apple", "Puma"];
+        const categoriesList = ["Schoenen", "Kleding", "Elektronica"];
+        const brandsList = ["Nike", "Adidas", "Apple", "Puma", "Samsung", "Anders"];
 
         let currentSelectedCategory = "all";
         let currentElektronicaSubFilter = "all";
         let loginModal;
-        let editModal;
 
         document.addEventListener("DOMContentLoaded", () => {
             loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-            editModal = new bootstrap.Modal(document.getElementById('editModal'));
-
-            // Zet de standaard beschrijving direct klaar in het formulier
-            document.getElementById('prod-desc').value = DEFAULT_DESCRIPTION;
-
             updateNavbarAndFilters();
             renderHomeCategories();
             renderShop();
@@ -560,7 +475,6 @@
         });
 
         function updateNavbarAndFilters() {
-            // Update Navbar Dropdown
             const navMenu = document.getElementById('navbar-category-menu');
             navMenu.innerHTML = `<li><a class="dropdown-item fw-bold" href="#" onclick="selectCategory('all')">Alles tonen</a></li>`;
             navMenu.innerHTML += `<li><hr class="dropdown-divider"></li>`;
@@ -568,61 +482,20 @@
                 navMenu.innerHTML += `<li><a class="dropdown-item" href="#" onclick="selectCategory('${c}')">${c}</a></li>`;
             });
 
-            // Update Merken Filter op Shop pagina
             const brandSelect = document.getElementById('filter-brand');
-            const currentBrandVal = brandSelect.value || "all";
             brandSelect.innerHTML = '<option value="all">Alle Merken</option>';
             brandsList.forEach(b => {
                 brandSelect.innerHTML += `<option value="${b}">${b}</option>`;
             });
-            brandSelect.value = currentBrandVal;
-
-            // Update Admin Filter Dropdown (boven beheerlijst)
-            const adminFilterCat = document.getElementById('admin-filter-category');
-            const currentAdminFilterVal = adminFilterCat ? adminFilterCat.value : "all";
-            if (adminFilterCat) {
-                adminFilterCat.innerHTML = '<option value="all">Alle Categorieën</option>';
-                categoriesList.forEach(c => {
-                    adminFilterCat.innerHTML += `<option value="${c}">${c}</option>`;
-                });
-                adminFilterCat.value = currentAdminFilterVal;
-            }
-
-            // Update Admin Formulier Dropdowns
-            const adminCatSelect = document.getElementById('prod-category-select');
-            adminCatSelect.innerHTML = '';
-            categoriesList.forEach(c => {
-                adminCatSelect.innerHTML += `<option value="${c}">${c}</option>`;
-            });
-
-            const adminBrandSelect = document.getElementById('prod-brand-select');
-            adminBrandSelect.innerHTML = '';
-            brandsList.forEach(b => {
-                adminBrandSelect.innerHTML += `<option value="${b}">${b}</option>`;
-            });
-
-            // Update Edit Modal Dropdowns
-            const editCatSelect = document.getElementById('edit-prod-category');
-            editCatSelect.innerHTML = '';
-            categoriesList.forEach(c => {
-                editCatSelect.innerHTML += `<option value="${c}">${c}</option>`;
-            });
-
-            const editBrandSelect = document.getElementById('edit-prod-brand');
-            editBrandSelect.innerHTML = '';
-            brandsList.forEach(b => {
-                editBrandSelect.innerHTML += `<option value="${b}">${b}</option>`;
-            });
         }
 
-        // Home Page categorie kaarten bouwen met leuke passende icoontjes
         function renderHomeCategories() {
             const grid = document.getElementById('home-categories-grid');
             grid.innerHTML = '';
 
             categoriesList.forEach(cat => {
                 let icon = 'bi-box-seam';
-                if (cat.toLowerCase() === 'schoenen') icon = 'bi-backpack';
+                if (cat.toLowerCase() === 'schoenen') icon = 'bi-smartwatch'; // Aangepast naar correct icoon
                 if (cat.toLowerCase() === 'kleding') icon = 'bi-tags-fill';
                 if (cat.toLowerCase() === 'elektronica') icon = 'bi-lightning-charge-fill';
 
@@ -639,12 +512,10 @@
 
         function selectCategory(cat) {
             currentSelectedCategory = cat;
-            currentElektronicaSubFilter = "all";
             switchPage('shop');
 
             const badgeContainer = document.getElementById('active-category-container');
             const badgeName = document.getElementById('active-category-name');
-            const subFilterContainer = document.getElementById('elektronica-sub-filters');
 
             if (cat.toLowerCase() === 'elektronica') {
                 subFilterContainer.classList.remove('d-none');
@@ -669,7 +540,6 @@
 
             if (subType === 'all') document.getElementById('sub-filter-all').classList.add('active');
             if (subType === 'smartwatch') document.getElementById('sub-filter-smartwatches').classList.add('active');
-            if (subType === 'oortjes') document.getElementById('sub-filter-oortjes').classList.add('active');
 
             renderShop();
         }
@@ -677,35 +547,6 @@
         function resetSubFilterButtons() {
             document.getElementById('sub-filter-all').classList.remove('active');
             document.getElementById('sub-filter-smartwatches').classList.remove('active');
-            document.getElementById('sub-filter-oortjes').classList.remove('active');
-        }
-
-        // Toevoegen via admin prompts
-        function addNewCategoryPrompt() {
-            const newCat = prompt("Typ de naam van de nieuwe categorie:");
-            if (newCat && newCat.trim() !== "") {
-                const cleaned = newCat.trim();
-                if (!categoriesList.includes(cleaned)) {
-                    categoriesList.push(cleaned);
-                    localStorage.setItem('arda_categories', JSON.stringify(categoriesList));
-                    updateNavbarAndFilters();
-                    renderHomeCategories();
-                    document.getElementById('prod-category-select').value = cleaned;
-                }
-            }
-        }
-
-        function addNewBrandPrompt() {
-            const newBrand = prompt("Typ de naam van het nieuwe merk:");
-            if (newBrand && newBrand.trim() !== "") {
-                const cleaned = newBrand.trim();
-                if (!brandsList.includes(cleaned)) {
-                    brandsList.push(cleaned);
-                    localStorage.setItem('arda_brands', JSON.stringify(brandsList));
-                    updateNavbarAndFilters();
-                    document.getElementById('prod-brand-select').value = cleaned;
-                }
-            }
         }
 
         function handleAdminNav() {
@@ -735,12 +576,10 @@
         function logoutAdmin() { sessionStorage.removeItem('admin_authenticated'); switchPage('home'); }
 
         function switchPage(page) {
-            // Reset active states in mobile bottom menu
             document.getElementById('btn-nav-home').classList.remove('active');
             document.getElementById('btn-nav-shop').classList.remove('active');
             document.getElementById('btn-nav-admin').classList.remove('active');
 
-            // Hide all pages
             document.getElementById('home-page').classList.add('d-none');
             document.getElementById('shop-page').classList.add('d-none');
             document.getElementById('admin-page').classList.add('d-none');
@@ -758,11 +597,7 @@
             } else if (page === 'admin') {
                 document.getElementById('admin-page').classList.remove('d-none');
                 document.getElementById('btn-nav-admin').classList.add('active');
-                document.getElementById('nav-dropdown-container').add('d-none');
-                document.getElementById('elektronica-sub-filters').classList.add('d-none');
-                // Reset admin filters bij openen pagina
-                if (document.getElementById('admin-search-input')) document.getElementById('admin-search-input').value = '';
-                if (document.getElementById('admin-filter-category')) document.getElementById('admin-filter-category').value = 'all';
+                document.getElementById('nav-dropdown-container').classList.add('d-none');
                 updateNavbarAndFilters();
                 renderAdmin();
             }
@@ -784,11 +619,7 @@
                     if (currentElektronicaSubFilter === 'smartwatch' && !titleAndDesc.includes('watch')) {
                         return false;
                     }
-                    if (currentElektronicaSubFilter === 'oortjes' && (!titleAndDesc.includes('oortjes') && !titleAndDesc.includes('airpods') && !titleAndDesc.includes('buds'))) {
-                        return false;
-                    }
                 }
-
                 return matchCat && matchBrand;
             });
 
@@ -798,8 +629,8 @@
             }
 
             filteredProducts.forEach(product => {
-                const snapMessage = encodeURIComponent(`Hey Arda! Ik heb interesse in de: ${product.title}`);
-                const snapLink = `https://www.snapchat.com/add/${SNAPCHAT_USERNAME}?share_id=${snapMessage}`;
+                const snapMessage = encodeURIComponent("Hey Arda! Ik heb interesse in de: " + product.title);
+                const snapLink = "https://www.snapchat.com/add/" + SNAPCHAT_USERNAME + "?share_id=" + snapMessage;
 
                 container.innerHTML += `
                     <div class="col-6 col-md-4">
@@ -812,9 +643,7 @@
                                     <small class="text-uppercase text-muted fw-bold card-brand-text">${product.brand || 'Merk'}</small>
                                 </div>
                                 <h5 class="card-title text-dark fw-bold mb-1 card-title-text" title="${product.title}">${product.title}</h5>
-                                <p class="card-text text-secondary flex-grow-1 mb-2 card-desc-text">
-                                    ${product.desc}
-                                </p>
+                                <p class="card-text text-secondary flex-grow-1 mb-2 card-desc-text">${product.desc}</p>
                                 <a href="${snapLink}" target="_blank" class="btn btn-snapchat w-100 text-uppercase">
                                     <i class="bi bi-snapchat"></i> Snap me
                                 </a>
@@ -829,30 +658,12 @@
             const list = document.getElementById('admin-products-list');
             list.innerHTML = '';
 
-            const searchQuery = document.getElementById('admin-search-input') ? document.getElementById('admin-search-input').value.toLowerCase().trim() : '';
-            const filterCategory = document.getElementById('admin-filter-category') ? document.getElementById('admin-filter-category').value : 'all';
-
-            // Filter de producten voor de admin-weergave
-            let adminFilteredProducts = products.map((p, originalIndex) => ({ ...p, originalIndex })).filter(product => {
-                const matchSearch = product.title.toLowerCase().includes(searchQuery) ||
-                    product.brand.toLowerCase().includes(searchQuery) ||
-                    product.category.toLowerCase().includes(searchQuery);
-                const matchCat = (filterCategory === 'all' || product.category === filterCategory);
-                return matchSearch && matchCat;
-            });
-
-            if (adminFilteredProducts.length === 0) {
-                list.innerHTML = `<div class="text-center text-muted py-4 small"><i class="bi bi-search-heart fs-3"></i><p class="mt-1">Geen resultaten voor je filters.</p></div>`;
+            if (products.length === 0) {
+                list.innerHTML = `<div class="text-center text-muted py-4 small">Geen producten in de code gevonden.</div>`;
                 return;
             }
 
-            adminFilteredProducts.forEach((product, currentFilterIndex) => {
-                // Sorteerpijlen werken alleen logisch als er GEEN filters actief zijn
-                const isSearchingOrFiltering = searchQuery !== '' || filterCategory !== 'all';
-
-                const upDisabled = (product.originalIndex === 0 || isSearchingOrFiltering) ? 'disabled opacity-25' : '';
-                const downDisabled = (product.originalIndex === products.length - 1 || isSearchingOrFiltering) ? 'disabled opacity-25' : '';
-
+            products.forEach((product) => {
                 list.innerHTML += `
                     <div class="list-group-item bg-light text-dark border-light d-flex justify-content-between align-items-center rounded-3 mb-2 p-2" style="border: 1px solid var(--border-color) !important;">
                         <div class="d-flex align-items-center flex-grow-1 text-truncate me-2">
@@ -862,101 +673,9 @@
                                 <small class="text-secondary" style="font-size: 0.75rem;">${product.brand} | ${product.category}</small>
                             </div>
                         </div>
-                        <div class="d-flex gap-1 align-items-center flex-shrink-0">
-                            <button class="btn btn-outline-secondary btn-order ${upDisabled}" onclick="moveProduct(${product.originalIndex}, -1)">▲</button>
-                            <button class="btn btn-outline-secondary btn-order ${downDisabled}" onclick="moveProduct(${product.originalIndex}, 1)">▼</button>
-                            <button class="btn btn-outline-primary btn-sm rounded-3 px-2" onclick="openEditModal(${product.id})">
-                                <i class="bi bi-pencil-fill"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm rounded-3 px-2" onclick="deleteProduct(${product.id})">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
                     </div>
                 `;
             });
-        }
-
-        function moveProduct(index, direction) {
-            const targetIndex = index + direction;
-            if (targetIndex < 0 || targetIndex >= products.length) return;
-
-            const temp = products[index];
-            products[index] = products[targetIndex];
-            products[targetIndex] = temp;
-
-            saveProducts();
-            renderAdmin();
-        }
-
-        function openEditModal(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-
-            document.getElementById('edit-prod-id').value = product.id;
-            document.getElementById('edit-prod-title').value = product.title;
-            document.getElementById('edit-prod-category').value = product.category;
-            document.getElementById('edit-prod-brand').value = product.brand;
-            document.getElementById('edit-prod-desc').value = product.desc;
-            document.getElementById('edit-prod-img').value = product.img;
-
-            editModal.show();
-        }
-
-        function saveProductEdit() {
-            const id = Number(document.getElementById('edit-prod-id').value);
-            const productIndex = products.findIndex(p => p.id === id);
-
-            if (productIndex !== -1) {
-                products[productIndex].title = document.getElementById('edit-prod-title').value;
-                products[productIndex].category = document.getElementById('edit-prod-category').value;
-                products[productIndex].brand = document.getElementById('edit-prod-brand').value;
-                products[productIndex].desc = document.getElementById('edit-prod-desc').value;
-                products[productIndex].img = document.getElementById('edit-prod-img').value;
-
-                saveProducts();
-                renderAdmin();
-                editModal.hide();
-            }
-        }
-
-        document.getElementById('add-product-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Alert om je te herinneren hoe je permanent producten toevoegt
-            alert('Let op: Omdat je wilt dat IEDEREEN dit product ziet, moet je dit product handig toevoegen aan de code (de "products" lijst) in je index.html bestand en deze opnieuw uploaden naar GitHub!');
-        });
-
-        const newProduct = {
-            id: Date.now(),
-            title: document.getElementById('prod-title').value,
-            category: document.getElementById('prod-category-select').value,
-            brand: document.getElementById('prod-brand-select').value,
-            desc: document.getElementById('prod-desc').value,
-            img: document.getElementById('prod-img').value
-        };
-
-        products.unshift(newProduct);
-        saveProducts();
-        renderAdmin();
-
-        // Formulier resetten en de standaardtekst direct weer terugzetten
-        this.reset();
-        document.getElementById('prod-desc').value = DEFAULT_DESCRIPTION;
-
-        alert('Product succesvol toegevoegd aan ARDA SHOP!');
-        });
-
-        function deleteProduct(id) {
-            if (confirm('Weet je zeker dat je dit product wilt verwijderen?')) {
-                products = products.filter(p => p.id !== id);
-                saveProducts();
-                renderAdmin();
-            }
-        }
-
-        function saveProducts() {
-            localStorage.setItem('arda_products', JSON.stringify(products));
         }
     </script>
 </body>
