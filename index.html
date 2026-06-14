@@ -492,12 +492,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const SNAPCHAT_USERNAME = "ardaa.gul";
+        // Webshop Logica
+        const SNAPCHAT_USERNAME = "JOUW_SNAPCHAT_GEBRUIKERSNAAM";
         const ADMIN_CODE = "2210";
         const DEFAULT_DESCRIPTION = "Snap me voor prijs.";
 
-        // Standaard productlijst
-        const defaultProducts = [
+        // 1. DIT IS JOUW VASTE PRODUCTENLIJST. IEDEREEN ZIET DEZE PRODUCTEN!
+        // Je kunt hieronder heel makkelijk producten toevoegen, aanpassen of verwijderen.
+        const products = [
             {
                 id: 1,
                 title: "Air Max Tavas Premium Leather",
@@ -532,11 +534,10 @@
             }
         ];
 
-        // Lijsten voor dropdowns (opgeslagen in localStorage zodat aangemaakte items bewaard blijven)
+        // Lijsten voor dropdowns (Deze mogen voor het gemak wel in het geheugen blijven)
         let categoriesList = JSON.parse(localStorage.getItem('arda_categories')) || ["Schoenen", "Kleding", "Elektronica"];
         let brandsList = JSON.parse(localStorage.getItem('arda_brands')) || ["Nike", "Adidas", "Apple", "Puma"];
 
-        let products = JSON.parse(localStorage.getItem('arda_products')) || defaultProducts;
         let currentSelectedCategory = "all";
         let currentElektronicaSubFilter = "all";
         let loginModal;
@@ -922,24 +923,28 @@
         document.getElementById('add-product-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const newProduct = {
-                id: Date.now(),
-                title: document.getElementById('prod-title').value,
-                category: document.getElementById('prod-category-select').value,
-                brand: document.getElementById('prod-brand-select').value,
-                desc: document.getElementById('prod-desc').value,
-                img: document.getElementById('prod-img').value
-            };
+            // Alert om je te herinneren hoe je permanent producten toevoegt
+            alert('Let op: Omdat je wilt dat IEDEREEN dit product ziet, moet je dit product handig toevoegen aan de code (de "products" lijst) in je index.html bestand en deze opnieuw uploaden naar GitHub!');
+        });
 
-            products.unshift(newProduct);
-            saveProducts();
-            renderAdmin();
+        const newProduct = {
+            id: Date.now(),
+            title: document.getElementById('prod-title').value,
+            category: document.getElementById('prod-category-select').value,
+            brand: document.getElementById('prod-brand-select').value,
+            desc: document.getElementById('prod-desc').value,
+            img: document.getElementById('prod-img').value
+        };
 
-            // Formulier resetten en de standaardtekst direct weer terugzetten
-            this.reset();
-            document.getElementById('prod-desc').value = DEFAULT_DESCRIPTION;
+        products.unshift(newProduct);
+        saveProducts();
+        renderAdmin();
 
-            alert('Product succesvol toegevoegd aan ARDA SHOP!');
+        // Formulier resetten en de standaardtekst direct weer terugzetten
+        this.reset();
+        document.getElementById('prod-desc').value = DEFAULT_DESCRIPTION;
+
+        alert('Product succesvol toegevoegd aan ARDA SHOP!');
         });
 
         function deleteProduct(id) {
